@@ -1,0 +1,29 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "bukulapak",
+  "main": "worker/index.ts",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "dist",
+    "not_found_handling": "single-page-application",
+    "run_worker_first": ["/api/*"]
+  },
+  "d1_databases": [
+    { "binding": "DB", "database_name": "bukulapak", "database_id": "xxxx-your-d1-database-id-xxxx", "migrations_dir": "migrations" }
+  ],
+  "durable_objects": {
+    "bindings": [{ "name": "LIVE", "class_name": "TenantLive" }]
+  },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["TenantLive"] }],
+  "triggers": { "crons": ["15 17 * * *"] },
+  "observability": { "enabled": true },
+  "ratelimits": [
+    { "name": "AUTH_LIMIT", "namespace_id": "1001", "simple": { "limit": 20, "period": 60 } }
+  ],
+  "vars": {
+    "GOOGLE_CLIENT_ID": "",
+    "TURNSTILE_SITE_KEY": "",
+    "ADMIN_WA": "6285777775477"
+  },
+  "routes": [{ "pattern": "bukulapak.solusikoding.com", "custom_domain": true }]
+}

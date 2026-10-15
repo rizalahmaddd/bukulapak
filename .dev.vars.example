@@ -1,0 +1,14 @@
+# Cloudflare Worker Local Environment Variables
+# Salin file ini ke .dev.vars untuk development lokal
+# SESSION_SECRET wajib diisi saat menjalankan wrangler dev (string acak panjang)
+SESSION_SECRET=dev-only-secret-change-me-0123456789abcdef
+
+# Opsional: Google OAuth Client ID
+# GOOGLE_CLIENT_ID=
+
+# Opsional: Cloudflare Turnstile bot verification
+# TURNSTILE_SITE_KEY=
+# TURNSTILE_SECRET=
+
+# Opsional: Nomor WhatsApp admin untuk pemulihan akun manual (format: 628xxx)
+# ADMIN_WA=6285777775477

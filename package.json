@@ -1,0 +1,68 @@
+{
+  "name": "bukulapak",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Aplikasi pembukuan & catatan kas UMKM offline-first: hitung untung/rugi, posisi uang riil (laci, bank, QRIS), kasbon & tagih WA, shift kasir, dan sinkron multi-perangkat.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -p tsconfig.json --noEmit && vite build",
+    "dev:worker": "wrangler dev",
+    "db:migrate:local": "wrangler d1 migrations apply bukulapak --local",
+    "db:migrate:remote": "wrangler d1 migrations apply bukulapak --remote --config $([ -f wrangler.prod.jsonc ] && echo wrangler.prod.jsonc || echo wrangler.jsonc)",
+    "deploy": "npm run build && wrangler deploy --config $([ -f wrangler.prod.jsonc ] && echo wrangler.prod.jsonc || echo wrangler.jsonc)",
+    "test": "vitest run",
+    "test:api": "API_E2E=1 vitest run",
+    "db:backup": "mkdir -p backups && wrangler d1 export bukulapak --remote --config $([ -f wrangler.prod.jsonc ] && echo wrangler.prod.jsonc || echo wrangler.jsonc) --output backups/bukulapak-$(date +%Y%m%d-%H%M).sql",
+    "cap:build": "VITE_API_URL=\"https://bukulapak.solusikoding.com\" npm run build && npx cap sync android",
+    "cap:sync": "npx cap sync android",
+    "cap:open": "npx cap open android",
+    "apk:build": "npm run cap:build && cd android && JAVA_HOME=\"/Applications/Android Studio.app/Contents/jbr/Contents/Home\" ./gradlew assembleDebug",
+    "aab:build": "npm run cap:build && cd android && JAVA_HOME=\"/Applications/Android Studio.app/Contents/jbr/Contents/Home\" ./gradlew bundleRelease"
+  },
+  "dependencies": {
+    "@capacitor/android": "^8.5.3",
+    "@capacitor/cli": "^8.5.3",
+    "@capacitor/core": "^8.5.3",
+    "@preact/signals": "^2.11.3",
+    "hono": "^4.13.13",
+    "lucide-preact": "^1.57.0",
+    "preact": "^11.0.1"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20261014.1",
+    "@preact/preset-vite": "^2.10.6",
+    "@types/node": "^26.6.5",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.4",
+    "vitest": "^5.0.4",
+    "wrangler": "^4.151.0"
+  },
+  "keywords": [
+    "pembukuan",
+    "kasir",
+    "pos",
+    "point-of-sale",
+    "warung",
+    "umkm",
+    "accounting",
+    "ledger",
+    "double-entry",
+    "offline-first",
+    "indexeddb",
+    "pwa",
+    "cloudflare-workers",
+    "cloudflare-d1",
+    "durable-objects",
+    "preact",
+    "hono",
+    "indonesia"
+  ],
+  "author": "rizalahmaddd",
+  "license": "MIT",
+  "homepage": "https://bukulapak.solusikoding.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rizalahmaddd/bukulapak.git"
+  }
+}

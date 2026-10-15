@@ -1,0 +1,19 @@
+{
+  "appId": "com.solusikoding.bukulapak",
+  "appName": "BukuLapak",
+  "webDir": "dist",
+  "server": {
+    "androidScheme": "https",
+    "hostname": "bukulapak.solusikoding.com"
+  },
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 1500,
+      "launchAutoHide": true,
+      "backgroundColor": "#f5f5f7",
+      "androidSplashResourceName": "splash",
+      "androidScaleType": "CENTER_CROP",
+      "showSpinner": false
+    }
+  }
+}
